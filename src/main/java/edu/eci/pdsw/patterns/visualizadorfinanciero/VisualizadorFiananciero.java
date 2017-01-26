@@ -31,25 +31,15 @@ public class VisualizadorFiananciero {
         DataAnalyzer dana=new DataAnalyzer();
         
         //Fuente de datos disponible por defecto
-        CloudStockData defaultDataSource=new CloudStockData();
+        CloudStockData defaultDataSource = new CloudStockData();
         
-        //Procesar datos dados por el iterador de la fuente de datos
-        dana.processData(defaultDataSource.getCurrentData());
-        
-        
-        
-        //Se espera poder visualizar ESTOS datos:
-             
-        System.out.println("DATOS QUE NO SE HAN PODIDO VISUALIZAR GRAFICAMENTE:");
-        
-        DataExtractor dext=new DataExtractor();
+        DataExtractor dext = new DataExtractor();
         Enumeration<Double> data=dext.extractDataFromBigData();
         
-        while (data.hasMoreElements()){
-            System.out.println(data.nextElement());
-        }
+        IteratorEnumerationAdapter adapter = new IteratorEnumerationAdapter(data);
         
-        
+        //Procesar datos dados por el iterador de la fuente de datos
+        dana.processData(adapter);        
     }
     
 }
